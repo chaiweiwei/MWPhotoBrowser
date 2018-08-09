@@ -1303,6 +1303,8 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
 #pragma mark - Grid
 
 - (void)showGridAnimated {
+    //不知道为什么偏移量有问题
+    _currentGridContentOffset.y += 64;
     [self showGrid:YES];
 }
 
@@ -1562,21 +1564,20 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
             if (self.startOnGrid && !_gridController) {
                 [self showGrid:YES];
                 if(![self showSelectedButtonStatus]) {
-                    [self dismiss];
+                    [self dismiss:YES];
                 }else {
                     return;
                 }
             } else if (!self.startOnGrid && _gridController) {
                 [self hideGrid];
                 if(![self showSelectedButtonStatus]) {
-                    [self dismiss];
+                    [self dismiss:YES];
                 }else {
                     return;
                 }
             }
         }
-        // Dismiss view controller
-        [self dismiss];
+        [self dismiss:NO];
     }
 }
 
@@ -1588,10 +1589,10 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     return showSelectedButton;
 }
 
-- (void)dismiss {
-    if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:)]) {
+- (void)dismiss:(BOOL)isVideo {
+    if ([_delegate respondsToSelector:@selector(photoBrowserDidFinishModalPresentation:isVideo:index:)]) {
         // Call delegate method and let them dismiss us
-        [_delegate photoBrowserDidFinishModalPresentation:self];
+        [_delegate photoBrowserDidFinishModalPresentation:self isVideo:isVideo index:self.currentIndex];
     } else  {
         [self dismissViewControllerAnimated:YES completion:nil];
     }

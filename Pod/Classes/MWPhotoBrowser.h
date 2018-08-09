@@ -35,8 +35,7 @@
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser isPhotoSelectedAtIndex:(NSUInteger)index;
 - (BOOL)photoBrowser:(MWPhotoBrowser *)photoBrowser canSelectedAtIndex:(NSUInteger)index;
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index selectedChanged:(BOOL)selected;
-- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser;
-
+- (void)photoBrowserDidFinishModalPresentation:(MWPhotoBrowser *)photoBrowser isVideo:(BOOL)isVideo index:(NSInteger)index;
 @end
 
 @interface MWPhotoBrowser : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
