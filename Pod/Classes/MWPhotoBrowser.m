@@ -1565,6 +1565,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                 [self showGrid:YES];
                 if(![self showSelectedButtonStatus]) {
                     [self dismiss:YES];
+                    return;
                 }else {
                     return;
                 }
@@ -1572,12 +1573,17 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
                 [self hideGrid];
                 if(![self showSelectedButtonStatus]) {
                     [self dismiss:YES];
+                    return;
                 }else {
                     return;
                 }
             }
         }
-        [self dismiss:NO];
+        if(![self showSelectedButtonStatus]) {
+            [self dismiss:YES];
+        }else {
+            [self dismiss:NO];
+        }
     }
 }
 
